@@ -1,0 +1,439 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Insert Student | School Management System</title>
+
+    <link rel="stylesheet" href="/style.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            font-family: "Segoe UI", Arial, sans-serif;
+            color: #183454;
+
+            background:
+                linear-gradient(
+                    rgba(12, 42, 80, 0.42),
+                    rgba(12, 42, 80, 0.52)
+                ),
+                url("https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=1920&q=85")
+                center / cover fixed no-repeat;
+        }
+
+        header {
+            padding: 25px 15px;
+            text-align: center;
+            color: white;
+            background: rgba(10, 40, 80, 0.30);
+        }
+
+        header h1 {
+            margin: 0 0 10px;
+            color: #123766;
+            font-size: clamp(28px, 4vw, 45px);
+            font-weight: 800;
+            text-shadow: 1px 3px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        header p {
+            margin: 0;
+            color: white;
+            font-size: 18px;
+        }
+
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            padding: 15px;
+            background: rgba(10, 40, 80, 0.94);
+        }
+
+        nav a {
+            padding: 10px 15px;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: 0.25s;
+        }
+
+        nav a:hover,
+        nav a.active {
+            background: #347fdf;
+            color: white;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 1.1fr;
+            align-items: center;
+            gap: 35px;
+            width: min(1100px, 94%);
+            margin: 30px auto;
+            padding: 30px;
+
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            border-radius: 22px;
+            box-shadow: 0 15px 40px rgba(0, 20, 50, 0.25);
+            backdrop-filter: blur(10px);
+        }
+
+        .image-section {
+            text-align: center;
+        }
+
+        .image-section img {
+            width: 100%;
+            height: 330px;
+            object-fit: cover;
+            border-radius: 16px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .image-section h2 {
+            color: #123766;
+            margin: 22px 0 10px;
+        }
+
+        .image-section p {
+            color: #526b89;
+            line-height: 1.7;
+        }
+
+        .form-section h2 {
+            margin-top: 0;
+            color: #123766;
+            font-size: 29px;
+        }
+
+        .form-section > p {
+            color: #526b89;
+            line-height: 1.6;
+        }
+
+        .student-form {
+            margin-top: 22px;
+            padding: 28px;
+            background: white;
+            border-radius: 17px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.10);
+        }
+
+        .form-group {
+            margin-bottom: 19px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 9px;
+            color: #183d68;
+            font-weight: 700;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #b9cbe0;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 16px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #2877d3;
+            box-shadow: 0 0 0 4px rgba(40, 119, 211, 0.13);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #2879d2, #1252a0);
+            color: white;
+            font-size: 17px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.25s;
+        }
+
+        .submit-btn:hover {
+            background: linear-gradient(135deg, #165db0, #0b3c79);
+            transform: translateY(-2px);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .home-btn {
+            display: block;
+            margin-top: 18px;
+            padding: 14px;
+            text-align: center;
+            color: #174b88;
+            border: 2px solid #174b88;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: 0.25s;
+        }
+
+        .home-btn:hover {
+            background: #174b88;
+            color: white;
+        }
+
+        #message {
+            display: none;
+            margin-top: 18px;
+            padding: 13px;
+            border-radius: 9px;
+            line-height: 1.5;
+            overflow-wrap: anywhere;
+        }
+
+        #message.success {
+            display: block;
+            color: #166534;
+            background: #dcfce7;
+        }
+
+        #message.error {
+            display: block;
+            color: #991b1b;
+            background: #fee2e2;
+        }
+
+        footer {
+            margin-top: 30px;
+            padding: 20px;
+            text-align: center;
+            color: white;
+            background: rgba(8, 35, 75, 0.95);
+        }
+
+        @media (max-width: 800px) {
+            .container {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+
+            .image-section img {
+                height: 250px;
+            }
+
+            .form-section h2 {
+                font-size: 25px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav a {
+                padding: 9px 10px;
+                font-size: 13px;
+            }
+
+            .container {
+                padding: 14px;
+            }
+
+            .student-form {
+                padding: 20px;
+            }
+
+            body {
+                background-attachment: scroll;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>STUDENT MANAGEMENT SYSTEM</h1>
+    <p>Add and manage student records easily</p>
+</header>
+
+<nav>
+    <a href="index.html">Home</a>
+    <a href="list.html">List Students</a>
+    <a href="listOne.html">Search Student</a>
+    <a href="insert.html" class="active">Insert Student</a>
+    <a href="update.html">Update Student</a>
+    <a href="delete.html">Delete Student</a>
+</nav>
+
+<main class="container">
+
+    <section class="image-section">
+        <img
+            src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=900&q=85"
+            alt="Students studying together"
+        >
+
+        <h2>Welcome to Student Records</h2>
+
+        <p>
+            Add new students to your school database. Enter the
+            student number, full name, and total marks to create
+            a new student record.
+        </p>
+    </section>
+
+    <section class="form-section">
+
+        <h2>Add New Student</h2>
+
+        <p>Fill in all the details below.</p>
+
+        <form id="insertForm" class="student-form">
+
+            <div class="form-group">
+                <label for="sno">Student Number (SNO)</label>
+                <input
+                    type="number"
+                    id="sno"
+                    name="sno"
+                    placeholder="Enter student number"
+                    min="1"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="name">Student Name</label>
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="Enter student full name"
+                    maxlength="100"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="total">Total Marks</label>
+                <input
+                    type="number"
+                    id="total"
+                    name="total"
+                    placeholder="Enter total marks"
+                    min="0"
+                    required
+                >
+            </div>
+
+            <button type="submit" class="submit-btn" id="submitButton">
+                + Add Student
+            </button>
+
+            <div id="message" role="status" aria-live="polite"></div>
+
+        </form>
+
+        <a href="index.html" class="home-btn">
+            &#8962; Go to Home Page
+        </a>
+
+    </section>
+
+</main>
+
+<footer>
+    Student Management System | Student Records Portal
+</footer>
+
+<script>
+    const insertForm = document.getElementById("insertForm");
+    const submitButton = document.getElementById("submitButton");
+    const message = document.getElementById("message");
+
+    insertForm.addEventListener("submit", async function(event) {
+        event.preventDefault();
+
+        const sno = document.getElementById("sno").value.trim();
+        const name = document.getElementById("name").value.trim();
+        const total = document.getElementById("total").value;
+
+        if (!sno || !name || total === "") {
+            showMessage("Please fill in all fields.", "error");
+            return;
+        }
+
+        if (Number(sno) < 1 || Number(total) < 0) {
+            showMessage(
+                "Student number must be positive and marks cannot be negative.",
+                "error"
+            );
+            return;
+        }
+
+        submitButton.disabled = true;
+        submitButton.textContent = "Adding Student...";
+
+        try {
+            const response = await fetch("/students", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    sno: Number(sno),
+                    name: name,
+                    total: Number(total)
+                })
+            });
+
+            const result = await response.text();
+
+            if (!response.ok) {
+                throw new Error(
+                    result || "Unable to insert student record."
+                );
+            }
+
+            showMessage(
+                result || "Student added successfully!",
+                "success"
+            );
+
+            insertForm.reset();
+
+        } catch (error) {
+            showMessage(
+                "Insert failed: " + error.message,
+                "error"
+            );
+        } finally {
+            submitButton.disabled = false;
+            submitButton.textContent = "+ Add Student";
+        }
+    });
+
+    function showMessage(text, type) {
+        message.textContent = text;
+        message.className = type;
+    }
+</script>
+
+</body>
+</html>

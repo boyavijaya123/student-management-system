@@ -1,0 +1,394 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Management System</title>
+    <link rel="stylesheet" href="/style.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            color: #183454;
+            background: #edf4fc;
+        }
+
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            padding: 18px;
+            background: #102f59;
+        }
+
+        nav a {
+            display: inline-block;
+            padding: 12px 17px;
+            border-radius: 9px;
+            color: white;
+            background: #173f73;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+
+        nav a:hover,
+        nav a.active {
+            background: #3483e8;
+            color: white;
+        }
+
+        .hero {
+            min-height: 430px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 65px 20px;
+            text-align: center;
+            color: white;
+            background:
+                linear-gradient(
+                    rgba(9, 35, 72, 0.60),
+                    rgba(9, 35, 72, 0.75)
+                ),
+                url("https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=1920&q=85")
+                center / cover no-repeat;
+        }
+
+        .hero h1 {
+            margin: 0 0 18px;
+            color: white;
+            font-size: clamp(32px, 5vw, 56px);
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        .hero p {
+            max-width: 750px;
+            margin: 0;
+            font-size: 19px;
+            line-height: 1.8;
+        }
+
+        .hero-button {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 14px 24px;
+            border-radius: 9px;
+            color: #123766;
+            background: white;
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .hero-button:hover {
+            background: #dbeafe;
+        }
+
+        .container {
+            width: min(1200px, 94%);
+            margin: -35px auto 40px;
+            padding: 30px;
+            position: relative;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 12px 35px rgba(15, 40, 75, 0.15);
+        }
+
+        .welcome {
+            display: grid;
+            grid-template-columns: 0.95fr 1.05fr;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .welcome img {
+            width: 100%;
+            height: 320px;
+            object-fit: cover;
+            border-radius: 15px;
+            background: #dbeafe;
+        }
+
+        .welcome h2 {
+            color: #123766;
+            font-size: 30px;
+        }
+
+        .welcome p {
+            color: #526b89;
+            font-size: 17px;
+            line-height: 1.8;
+        }
+
+        .section-title {
+            margin: 45px 0 22px;
+            text-align: center;
+            color: #123766;
+            font-size: 29px;
+        }
+
+        .operations {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 20px;
+        }
+
+        .operation-card {
+            display: block;
+            padding: 24px;
+            border: 1px solid #dce7f5;
+            border-radius: 14px;
+            background: #f8fbff;
+            text-decoration: none;
+            transition: 0.25s;
+        }
+
+        .operation-card:hover {
+            transform: translateY(-5px);
+            border-color: #3981d9;
+            box-shadow: 0 10px 25px rgba(20, 70, 130, 0.12);
+        }
+
+        .operation-card .symbol {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: #e2edff;
+            font-size: 25px;
+        }
+
+        .operation-card h3 {
+            margin: 16px 0 8px;
+            color: #174b88;
+        }
+
+        .operation-card p {
+            margin: 0;
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+            margin-top: 35px;
+        }
+
+        .feature {
+            padding: 20px;
+            text-align: center;
+            border-radius: 12px;
+            background: #eff6ff;
+        }
+
+        .feature h3 {
+            margin: 0 0 8px;
+            color: #174b88;
+        }
+
+        .feature p {
+            margin: 0;
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        footer {
+            padding: 25px 15px;
+            text-align: center;
+            color: white;
+            background: #102f59;
+        }
+
+        footer p {
+            margin: 5px;
+        }
+
+        @media (max-width: 800px) {
+            .welcome {
+                grid-template-columns: 1fr;
+            }
+
+            .operations {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 520px) {
+            nav {
+                gap: 6px;
+                padding: 12px;
+            }
+
+            nav a {
+                padding: 9px 10px;
+                font-size: 12px;
+            }
+
+            .hero {
+                min-height: 350px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .operations {
+                grid-template-columns: 1fr;
+            }
+
+            .welcome img {
+                height: 230px;
+            }
+
+            .container {
+                margin-top: -20px;
+                padding: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<nav>
+    <a href="index.html" class="active">⌂ Home</a>
+    <a href="list.html">♟ List Students</a>
+    <a href="listOne.html">⌕ Find Student</a>
+    <a href="insert.html">＋ Insert Student</a>
+    <a href="update.html">✎ Update Student</a>
+    <a href="delete.html">▤ Delete Student</a>
+</nav>
+
+<section class="hero">
+    <h1>STUDENT MANAGEMENT SYSTEM</h1>
+
+    <p>
+        Welcome to the Student Management System. Manage student records
+        efficiently through a simple, organized, and user-friendly interface.
+    </p>
+
+    <a href="list.html" class="hero-button">View Student Records →</a>
+</section>
+
+<main class="container">
+
+    <section class="welcome">
+
+        <img
+            src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1000&q=85"
+            alt="College students studying together"
+            loading="eager"
+        >
+
+        <div>
+            <h2>Welcome to Student Records</h2>
+
+            <p>
+                This application helps you manage school student information
+                in one place. You can add new student records, view all
+                students, find individual records, update marks, and delete
+                records when necessary.
+            </p>
+
+            <p>
+                Use the operation cards below to access each feature.
+            </p>
+        </div>
+
+    </section>
+
+    <h2 class="section-title">Student Operations</h2>
+
+    <section class="operations">
+
+        <a href="list.html" class="operation-card">
+            <span class="symbol">👥</span>
+            <h3>1. List All Students</h3>
+            <p>View all student numbers, names, and total marks.</p>
+        </a>
+
+        <a href="listOne.html" class="operation-card">
+            <span class="symbol">🔍</span>
+            <h3>2. Find Student</h3>
+            <p>Search for an individual student and view their details.</p>
+        </a>
+
+        <a href="insert.html" class="operation-card">
+            <span class="symbol">➕</span>
+            <h3>3. Insert Student</h3>
+            <p>Add a new student record to your database.</p>
+        </a>
+
+        <a href="update.html" class="operation-card">
+            <span class="symbol">✏️</span>
+            <h3>4. Update Student</h3>
+            <p>Modify an existing student's name or total marks.</p>
+        </a>
+
+        <a href="delete.html" class="operation-card">
+            <span class="symbol">🗑️</span>
+            <h3>5. Delete Student</h3>
+            <p>Remove a student record after confirming the action.</p>
+        </a>
+
+        <a href="list.html" class="operation-card">
+            <span class="symbol">📋</span>
+            <h3>6. Manage Records</h3>
+            <p>Open the student list and check the current records.</p>
+        </a>
+
+    </section>
+
+    <h2 class="section-title">System Features</h2>
+
+    <section class="features">
+
+        <div class="feature">
+            <h3>📚 Organized Records</h3>
+            <p>Keep student information organized and easy to access.</p>
+        </div>
+
+        <div class="feature">
+            <h3>⚡ Quick Operations</h3>
+            <p>Navigate easily between student record management pages.</p>
+        </div>
+
+        <div class="feature">
+            <h3>💻 Simple Interface</h3>
+            <p>Use a clear, responsive design on desktop and mobile screens.</p>
+        </div>
+
+    </section>
+
+</main>
+
+<footer>
+    <p><strong>Student Management System</strong></p>
+    <p>Student Records Portal | Built with HTML, CSS, JavaScript, Express and MySQL</p>
+</footer>
+
+</body>
+</html>

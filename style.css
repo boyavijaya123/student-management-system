@@ -1,0 +1,313 @@
+
+/* =====================================
+   SCHOOL MANAGEMENT SYSTEM
+   Professional Blue Theme
+===================================== */
+
+/* General page design */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    margin: 0;
+    padding: 25px;
+    color: #183454;
+    min-height: 100vh;
+
+    background:
+        linear-gradient(
+            rgba(12, 42, 80, 0.38),
+            rgba(12, 42, 80, 0.45)
+        ),
+        url("https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=1920&q=85")
+        center / cover fixed no-repeat;
+}
+
+/* Headings */
+h1, h2 {
+    color: #123766;
+    text-align: center;
+}
+
+h1 {
+    font-size: 32px;
+    letter-spacing: 0.5px;
+}
+
+h2 {
+    font-size: 24px;
+}
+
+/* Navigation links */
+nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin: 20px auto 30px;
+}
+
+nav a {
+    display: inline-block;
+    padding: 12px 17px;
+    color: white;
+    background: #103b75;
+    text-decoration: none;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    background: #347fdf;
+    color: white;
+    text-decoration: none;
+    transform: translateY(-2px);
+}
+
+/* Search bar */
+#searchBar {
+    display: block;
+    width: 100%;
+    max-width: 450px;
+    margin: 20px auto 0;
+    padding: 13px 16px;
+    font-size: 16px;
+    border: 1px solid #b9cbe0;
+    border-radius: 9px;
+    outline: none;
+    background: white;
+}
+
+#searchBar:focus {
+    border-color: #2877d3;
+    box-shadow: 0 0 0 4px rgba(40, 119, 211, 0.15);
+}
+
+/* Student suggestions list */
+#studentList {
+    max-width: 450px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 0 0 9px 9px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+    overflow: hidden;
+}
+
+.student-option {
+    padding: 13px 16px;
+    cursor: pointer;
+    border-bottom: 1px solid #e8edf4;
+    font-size: 15px;
+    transition: 0.2s;
+}
+
+.student-option:last-child {
+    border-bottom: none;
+}
+
+.student-option:hover {
+    background: #eaf3ff;
+    color: #123766;
+}
+
+/* Forms and glass-effect cards */
+form {
+    width: 100%;
+    max-width: 500px;
+    margin: 25px auto;
+    padding: 30px;
+
+    background: rgba(255, 255, 255, 0.93);
+    border: 1px solid rgba(255, 255, 255, 0.85);
+    border-radius: 16px;
+
+    box-shadow: 0 12px 35px rgba(0, 25, 60, 0.2);
+    backdrop-filter: blur(10px);
+}
+
+label {
+    display: block;
+    margin-top: 18px;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #183d68;
+}
+
+/* Input fields */
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 12px 14px;
+    margin-top: 6px;
+
+    border: 1px solid #c5d2e2;
+    border-radius: 8px;
+
+    font-family: inherit;
+    font-size: 15px;
+    color: #183454;
+    background: #fff;
+    outline: none;
+    transition: 0.25s;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: #2877d3;
+    box-shadow: 0 0 0 4px rgba(40, 119, 211, 0.12);
+}
+
+/* Buttons */
+button {
+    padding: 12px 20px;
+    margin-top: 16px;
+
+    background: linear-gradient(135deg, #2879d2, #1252a0);
+    color: white;
+
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+button:hover {
+    background: linear-gradient(135deg, #165db0, #0b3c79);
+    transform: translateY(-1px);
+}
+
+button:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Delete buttons */
+.delete-btn {
+    background: linear-gradient(135deg, #ef4444, #c91f36);
+    color: white;
+}
+
+.delete-btn:hover {
+    background: linear-gradient(135deg, #d92e3e, #a9152a);
+}
+
+/* Links */
+a {
+    color: #1769aa;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Student table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 25px;
+
+    background: rgba(255, 255, 255, 0.96);
+    border-radius: 10px;
+    overflow: hidden;
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.14);
+}
+
+th, td {
+    padding: 13px 15px;
+    border: 1px solid #e0e7ef;
+    text-align: left;
+}
+
+th {
+    background: #123f79;
+    color: white;
+    font-weight: 600;
+}
+
+tr:nth-child(even) {
+    background: #f0f6fd;
+}
+
+tr:hover {
+    background: #e3efff;
+}
+
+/* Images */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Horizontal lines */
+hr {
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.65);
+    margin: 20px 0;
+}
+
+/* Footer */
+footer {
+    margin-top: 40px;
+    padding: 22px;
+    text-align: center;
+    background: rgba(8, 35, 75, 0.95);
+    color: #e5eefb;
+    border-radius: 10px;
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+    body {
+        padding: 12px;
+        background-attachment: scroll;
+    }
+
+    h1 {
+        font-size: 25px;
+    }
+
+    h2 {
+        font-size: 21px;
+    }
+
+    form {
+        padding: 20px 16px;
+        border-radius: 12px;
+    }
+
+    nav {
+        gap: 6px;
+    }
+
+    nav a {
+        padding: 9px 11px;
+        font-size: 12px;
+    }
+
+    table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+        font-size: 13px;
+    }
+
+    th, td {
+        padding: 9px;
+    }
+
+    button {
+        max-width: 100%;
+    }
+}

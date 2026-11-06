@@ -1,0 +1,426 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Delete Student | School Management System</title>
+
+    <link rel="stylesheet" href="/style.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            font-family: "Segoe UI", Arial, sans-serif;
+            color: #183454;
+
+            background:
+                linear-gradient(
+                    rgba(12, 42, 80, 0.40),
+                    rgba(12, 42, 80, 0.50)
+                ),
+                url("https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=1920&q=85")
+                center / cover fixed no-repeat;
+        }
+
+        header {
+            padding: 25px 15px;
+            text-align: center;
+            color: white;
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        header h1 {
+            margin: 0 0 10px;
+            color: #123766;
+            font-size: clamp(28px, 4vw, 48px);
+            font-weight: 800;
+            text-shadow: 1px 3px 6px rgba(0, 0, 0, 0.25);
+        }
+
+        header p {
+            margin: 0;
+            font-size: 18px;
+            color: white;
+        }
+
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            padding: 15px;
+            background: rgba(10, 40, 80, 0.94);
+        }
+
+        nav a {
+            padding: 10px 15px;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: 0.25s;
+        }
+
+        nav a:hover,
+        nav a.active {
+            background: #347fdf;
+            color: white;
+        }
+
+        .container {
+            width: min(1200px, 94%);
+            margin: 25px auto;
+            padding: 30px;
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 35px;
+            align-items: center;
+
+            background: rgba(255, 255, 255, 0.93);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            border-radius: 25px;
+            box-shadow: 0 15px 40px rgba(0, 20, 50, 0.25);
+            backdrop-filter: blur(10px);
+        }
+
+        .image-section {
+            text-align: center;
+            padding: 10px;
+        }
+
+        .image-section img {
+            display: block;
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            border-radius: 16px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.18);
+        }
+
+        .image-section h2 {
+            margin: 22px 0 10px;
+            color: #123766;
+        }
+
+        .image-section p {
+            color: #526b89;
+            line-height: 1.7;
+        }
+
+        .form-section {
+            padding: 10px;
+        }
+
+        .form-section h2 {
+            color: #123766;
+            font-size: 30px;
+            margin-top: 0;
+        }
+
+        .form-section > p {
+            color: #526b89;
+            line-height: 1.7;
+            font-size: 17px;
+        }
+
+        .delete-card {
+            margin-top: 25px;
+            padding: 30px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.12);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 12px;
+            font-weight: 700;
+            color: #183d68;
+        }
+
+        input {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #b9cbe0;
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 16px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #2877d3;
+            box-shadow: 0 0 0 4px rgba(40, 119, 211, 0.13);
+        }
+
+        .delete-btn {
+            width: 100%;
+            margin-top: 22px;
+            padding: 16px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #ef4444, #c91f36);
+            color: white;
+            font-size: 17px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.25s;
+        }
+
+        .delete-btn:hover {
+            background: linear-gradient(135deg, #d92e3e, #a9152a);
+            transform: translateY(-2px);
+        }
+
+        .delete-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .home-btn {
+            display: block;
+            width: 100%;
+            margin-top: 25px;
+            padding: 15px;
+            text-align: center;
+            color: #174b88;
+            border: 2px solid #174b88;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: 0.25s;
+        }
+
+        .home-btn:hover {
+            color: white;
+            background: #174b88;
+        }
+
+        #message {
+            display: none;
+            margin-top: 18px;
+            padding: 13px;
+            border-radius: 9px;
+            line-height: 1.5;
+            overflow-wrap: anywhere;
+        }
+
+        #message.success {
+            display: block;
+            color: #166534;
+            background: #dcfce7;
+        }
+
+        #message.error {
+            display: block;
+            color: #991b1b;
+            background: #fee2e2;
+        }
+
+        footer {
+            margin-top: 35px;
+            padding: 20px;
+            text-align: center;
+            color: white;
+            background: rgba(8, 35, 75, 0.95);
+        }
+
+        @media (max-width: 800px) {
+            .container {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+
+            .image-section img {
+                height: 250px;
+            }
+
+            .form-section h2 {
+                font-size: 25px;
+            }
+
+            .delete-card {
+                padding: 22px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav a {
+                padding: 9px 10px;
+                font-size: 13px;
+            }
+
+            .container {
+                width: 95%;
+                padding: 12px;
+            }
+
+            .image-section img {
+                height: 200px;
+            }
+
+            body {
+                background-attachment: scroll;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>DELETE STUDENT</h1>
+    <p>Manage student records safely and easily</p>
+</header>
+
+<nav>
+    <a href="index.html">Home</a>
+    <a href="list.html">List Students</a>
+    <a href="listOne.html">Search Student</a>
+    <a href="insert.html">Insert Student</a>
+    <a href="update.html">Update Student</a>
+    <a href="delete.html" class="active">Delete Student</a>
+</nav>
+
+<main class="container">
+
+    <section class="image-section">
+        <img
+            src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=900&q=85"
+            alt="Students at an educational campus"
+        >
+
+        <h2>Student Records</h2>
+
+        <p>
+            Keep your school database organized. Verify the student
+            number before removing a record from the database.
+        </p>
+    </section>
+
+    <section class="form-section">
+
+        <h2>Student Number to Delete</h2>
+
+        <p>
+            Enter the student number (SNO) of the record you want
+            to remove from the database.
+        </p>
+
+        <div class="delete-card">
+
+            <form id="deleteForm">
+
+                <label for="sno">Student Number (SNO)</label>
+
+                <input
+                    type="number"
+                    id="sno"
+                    name="sno"
+                    placeholder="Enter student number"
+                    min="1"
+                    required
+                >
+
+                <button type="submit" class="delete-btn" id="deleteButton">
+                    &#128465; Delete Student
+                </button>
+
+            </form>
+
+            <div id="message" role="status" aria-live="polite"></div>
+
+        </div>
+
+        <a href="index.html" class="home-btn">
+            &#8962; Go to Home Page
+        </a>
+
+    </section>
+
+</main>
+
+<footer>
+    Student Management System | Student Records Portal
+</footer>
+
+<script>
+    const deleteForm = document.getElementById("deleteForm");
+    const snoInput = document.getElementById("sno");
+    const deleteButton = document.getElementById("deleteButton");
+    const message = document.getElementById("message");
+
+    deleteForm.addEventListener("submit", async function(event) {
+        event.preventDefault();
+
+        const sno = snoInput.value.trim();
+
+        if (!sno || Number(sno) < 1) {
+            showMessage("Please enter a valid student number.", "error");
+            return;
+        }
+
+        const confirmed = confirm(
+            "Are you sure you want to delete student number " +
+            sno + "?\n\nThis action may permanently remove the record."
+        );
+
+        if (!confirmed) {
+            return;
+        }
+
+        deleteButton.disabled = true;
+        deleteButton.textContent = "Deleting...";
+
+        try {
+            const response = await fetch(
+                "/students/" + encodeURIComponent(sno),
+                {
+                    method: "DELETE"
+                }
+            );
+
+            const result = await response.text();
+
+            if (!response.ok) {
+                throw new Error(
+                    result || "Unable to delete this student."
+                );
+            }
+
+            showMessage(
+                result || "Student deleted successfully.",
+                "success"
+            );
+
+            snoInput.value = "";
+
+        } catch (error) {
+            showMessage(
+                "Delete failed: " + error.message,
+                "error"
+            );
+        } finally {
+            deleteButton.disabled = false;
+            deleteButton.innerHTML = "&#128465; Delete Student";
+        }
+    });
+
+    function showMessage(text, type) {
+        message.textContent = text;
+        message.className = type;
+    }
+</script>
+
+</body>
+</html>
